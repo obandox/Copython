@@ -13,26 +13,14 @@ namespace cocos2d{
 
 //CApplication
 
-class ProxyCCApplication : public CCApplication
-{
-	public:
-		void *app;
 
-
-		virtual bool initInstance();
-		virtual bool applicationDidFinishLaunching();
-
-		virtual void applicationDidEnterBackground();
-
-		virtual void applicationWillEnterForeground();
-};
+class ProxyCCApplication;
 
 	typedef struct {
 		PyObject_HEAD
 		ProxyCCApplication* val;
 	    PyObject *weakreflist;
 	} PyApplicationObject;
-
 
 
 

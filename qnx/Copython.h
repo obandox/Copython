@@ -13,6 +13,8 @@
 #include "CoFileUtils.h"
 #include "CoApplication.h"
 
+#include "DefaultScene.h"
+
 namespace cocos2d{
 
 	static PyMethodDef cocos2dMethods[] = {

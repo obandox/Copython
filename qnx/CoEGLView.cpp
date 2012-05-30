@@ -10,11 +10,9 @@ namespace cocos2d{
 	CCEGLView*
 	CCEGLView_FromObject (PyObject* obj, CCEGLView* temp)
 	{
-	    float val;
-	    int length;
 
 	    if (PyCCEGLView_Check (obj))
-	        return &( (PyEGLViewObject*) obj )->val;
+	        return ( (PyEGLViewObject*) obj )->val;
 
 
 	    return NULL;
@@ -24,6 +22,7 @@ namespace cocos2d{
 	static PyObject*
 	EGLView_new (PyTypeObject *type, PyObject *args, PyObject *kwds)
 	{
+
 	    PyEGLViewObject *self;
 	    self = (PyEGLViewObject *)type->tp_alloc (type, 0);
 	    if (self)
@@ -33,18 +32,17 @@ namespace cocos2d{
 	    return (PyObject*)self;
 	}
 
-	static int
+
+	static PyObject*
 	EGLView_init (PyEGLViewObject *self, PyObject *args, PyObject *kwds)
 	{
-		CCEGLView *arg, temp;
-	    if (!(arg = CCEGLView_FromObject(args, &temp)))
-	    {
-	        RAISE (PyExc_TypeError, "Argument must be EGLView style object");
-	        return -1;
+		fprintf(stderr, "wtf init view\n");
+	    if (self)
+	    {	self->val = new CCEGLView();
+	        self->weakreflist = NULL;
 	    }
+	    return (PyObject*)self;
 
-
-	    return 0;
 	}
 
 

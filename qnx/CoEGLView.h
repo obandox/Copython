@@ -15,7 +15,7 @@ namespace cocos2d{
 
 	typedef struct {
 		PyObject_HEAD
-		CCEGLView val;
+		CCEGLView* val;
 	    PyObject *weakreflist;
 	} PyEGLViewObject;
 
