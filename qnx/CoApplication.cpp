@@ -4,7 +4,7 @@
 #include <cocos2d.h>
 #include "CoApplication.h"
 #include "CoBase.h"
-#include "DefaultScene.h"
+#include "CoDefaultScene.h"
 
 namespace cocos2d{
 
@@ -15,54 +15,29 @@ class ProxyCCApplication : public CCApplication
 
 
 		virtual bool initInstance(){
-			/**
-			PyObject* self = (PyObject*)app;
-			PyObject* ret=PyEval_CallMethod(self, "initInstance", "");
-			return PyInt_AsLong(ret) ;
-			**/
 			CCEGLView * pMainWnd = new CCEGLView();
 			pMainWnd->Create(1024, 600);
 			CCFileUtils::setResourcePath("app/native/Resources");
-
-			return true;
+			PyObject* self = (PyObject*)app;
+			PyObject* ret=PyObject_CallMethod(self, "initInstance", NULL);
+			return PyInt_AsLong(ret) ;
 		}
 		virtual bool applicationDidFinishLaunching(){
-			/**
-			PyObject* self = (PyObject*)app;
-			PyObject* ret=PyEval_CallMethod(self, "applicationDidFinishLaunching", "");
-			return PyInt_AsLong(ret) ;
-			**/
-
 			CCDirector *pDirector = CCDirector::sharedDirector();
-
 			pDirector->setOpenGLView(&CCEGLView::sharedOpenGLView());
-
-			// enable High Resource Mode(2x, such as iphone4) and maintains low resource on other devices.
-			// pDirector->enableRetinaDisplay(true);
-
-			// turn on display FPS
-			pDirector->setDisplayFPS(true);
-
-			// pDirector->setDeviceOrientation(kCCDeviceOrientationLandscapeLeft);
-
-			// set FPS. the default value is 1.0/60 if you don't call this
-			pDirector->setAnimationInterval(1.0 / 60);
-
-			// create a scene. it's an autorelease object
-			CCScene *pScene = Default::scene();
-
-			// run
-			pDirector->runWithScene(pScene);
-
-			return true;
+			PyObject* self = (PyObject*)app;
+			PyObject* ret=PyObject_CallMethod(self, "applicationDidFinishLaunching", NULL);
+			return PyInt_AsLong(ret) ;
 		}
 
 		virtual void applicationDidEnterBackground(){
-
+			PyObject* self = (PyObject*)app;
+			PyObject* ret=PyObject_CallMethod(self, "applicationDidEnterBackground", NULL);
 		}
 
 		virtual void applicationWillEnterForeground(){
-
+			PyObject* self = (PyObject*)app;
+			PyObject* ret=PyObject_CallMethod(self, "applicationWillEnterForeground", NULL);
 		}
 };
 	ProxyCCApplication*
@@ -77,13 +52,15 @@ class ProxyCCApplication : public CCApplication
 	}
 
 	static PyObject*
-	application_init (PyTypeObject *argself, PyObject *args, PyObject *kwds)
+	application_init (PyObject *argself, PyObject *args, PyObject *kwds)
 	{
 	    PyApplicationObject *self;
+
+
 	    self = (PyApplicationObject *)argself;
 	    if (self)
 	    {	self->val = new ProxyCCApplication();
-	    	self->val->app=(void*)self;
+	    	self->val->app=(void*)argself;
 	        self->weakreflist = NULL;
 	    }
 	    return (PyObject*)self;

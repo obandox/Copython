@@ -1,35 +1,73 @@
 /*
- * CoDirector.h
+ * CoEGLView.h
  *
  *  Created on: 29/05/2012
  *      Author: miguel
  */
 
-#ifndef CODIRECTOR_H_
-#define CODIRECTOR_H_
-#include <CCGeometry.h>
+#ifndef _CODirector_H_
+#define _CODirector_H_
+#include <CCDirector.h>
+#include <Cocos2d.h>
+
+#include "CoDefaultScene.h"
 
 namespace cocos2d{
 
-//CDirector
+//director
 
-	typedef struct {
-		PyObject_HEAD
-		CCDisplayLinkDirector val;
-	    PyObject *weakreflist;
-	} PyDirectorObject;
+PyObject *
+director_setDisplayFPS(PyObject *self, PyObject *args)
+{
+    int boolean;
 
-	extern PyTypeObject PyCCDirectorType;
-	#define PyCCDirector_Check(x) ((x)->ob_type == &PyCCDirectorType)
-
-	//proxy =D
-	CCDisplayLinkDirector* CCDirector_FromObject (PyObject* obj, CCDirector* temp);
-
-	//impresion str
-	PyObject* director_repr (PyDirectorObject *self);
-	PyObject* director_str (PyDirectorObject *self);
+    if (!IntFromObjIndex(args, 0, &boolean))
+        return NULL;
+    CCDirector::sharedDirector()->setDisplayFPS(boolean);
+    return Py_BuildValue("i", 1);
+}
 
 
-	void initDirector(PyObject* module);
+PyObject *
+director_setAnimationInterval(PyObject *self, PyObject *args)
+{
+    float val;
+
+
+    if (!FloatFromObjIndex(args, 0, &val))
+        return NULL;
+
+    fprintf(stderr," ani interval %.2f ",(val));
+
+    CCDirector::sharedDirector()->setAnimationInterval((double)val);
+    return Py_BuildValue("i", 1);
+}
+
+
+PyObject *
+director_runWithScene(PyObject *self, PyObject *args)
+{
+
+
+    CCDirector::sharedDirector()->runWithScene(Default::scene());
+    return Py_BuildValue("i", 1);
+}
+
+
+static PyMethodDef directorMethods[] = {
+		{"setDisplayFPS",  director_setDisplayFPS, METH_VARARGS, "Set Display FPS."},
+		{"setAnimationInterval",  director_setAnimationInterval, METH_VARARGS, "set Animation Interval."},
+		{"runWithScene",  director_runWithScene, METH_VARARGS, "run With Scene."},
+	{NULL}  /* Sentinel */
+};
+
+
+
+	void initDirector(PyObject* module){
+		//director
+
+		PyObject* module2= Py_InitModule("director", directorMethods);
+		PyModule_AddObject(module, "director", module2);
+	}
 }
 #endif /* COPOINT_H_ */

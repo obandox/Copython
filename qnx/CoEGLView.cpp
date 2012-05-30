@@ -36,7 +36,6 @@ namespace cocos2d{
 	static PyObject*
 	EGLView_init (PyEGLViewObject *self, PyObject *args, PyObject *kwds)
 	{
-		fprintf(stderr, "wtf init view\n");
 	    if (self)
 	    {	self->val = new CCEGLView();
 	        self->weakreflist = NULL;
