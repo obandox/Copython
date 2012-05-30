@@ -66,7 +66,6 @@
 								<option id="com.qnx.qcc.option.linker.security.1794064552" name="Enhanced Security (-Wl,-z,relro -Wl,-z,now)" superClass="com.qnx.qcc.option.linker.security" value="true" valueType="boolean"/>
 								<option id="com.qnx.qcc.option.linker.libraryPaths.1757627798" name="Library Paths (-L)" superClass="com.qnx.qcc.option.linker.libraryPaths" valueType="libPaths">
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/lib"/>
-									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}/Python}&quot;"/>
 									<listOptionValue builtIn="false" value="${QNX_TARGET}/../target-override/${CPUVARDIR}/usr/lib"/>
 									<listOptionValue builtIn="false" value="../../../cocos2dx/proj.qnx/${ConfigName}"/>
 									<listOptionValue builtIn="false" value="../../../CocosDenshion/proj.qnx/${ConfigName}"/>
@@ -77,7 +76,6 @@
 									<listOptionValue builtIn="false" value="../../../chipmunk/proj.qnx/${ConfigName}/libchipmunk.a"/>
 									<listOptionValue builtIn="false" value="../../../cocos2dx/proj.qnx/${ConfigName}/libcocos2dx.a"/>
 								</option>
-								<option id="com.qnx.qcc.option.linker.objectFiles.1026845246" name="Additional Object Files" superClass="com.qnx.qcc.option.linker.objectFiles" valueType="userObjs"/>
 								<inputType id="com.qnx.qcc.inputType.linker.697035559" superClass="com.qnx.qcc.inputType.linker">
 									<additionalInput kind="additionalinputdependency" paths="$(USER_OBJS)"/>
 									<additionalInput kind="additionalinput" paths="$(LIBS)"/>

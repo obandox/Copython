@@ -1,4 +1,4 @@
 import cocos2d
 
-class AppDelgate (cocos2d.Application):
+class AppPoint (cocos2d.Point):
     pass

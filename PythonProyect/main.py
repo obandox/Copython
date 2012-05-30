@@ -1,6 +1,9 @@
 
 import appDelegate
 
+from cocos2d import Point
+
 def main():
-    app= appDelegate.AppDelgate()
-    app.run();
+    point = Point(15,20)
+    point.x+=100
+    print point
