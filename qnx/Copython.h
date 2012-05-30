@@ -8,6 +8,10 @@
 
 #include "CoBase.h"
 #include "CoPoint.h"
+#include "CoDirector.h"
+#include "CoEGLView.h"
+#include "CoFileUtils.h"
+#include "CoApplication.h"
 
 namespace cocos2d{
 
@@ -20,7 +24,11 @@ namespace cocos2d{
 		PyObject* m;
 		m = Py_InitModule3("cocos2d", cocos2dMethods,
 						   "copython es un intento por pegar cocos2d a python para una playbook.");
+		initfileUtils(m);
 		initPoint(m);
+		initDirector(m);
+		initEGLView(m);
+		initApplication(m);
 	}
 }
 
